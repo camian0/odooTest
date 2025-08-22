@@ -1,41 +1,41 @@
 /** @odoo-module **/
-import { OrderSummary } from "@point_of_sale/app/screens/product_screen/order_summary/order_summary";
+// import { OrderSummary } from "@point_of_sale/app/screens/product_screen/order_summary/order_summary";
+import { OrderWidget } from "@point_of_sale/app/generic_components/order_widget/order_widget";
 import { patch } from "@web/core/utils/patch";
 import { useEffect } from "@odoo/owl";
 
-patch(OrderSummary.prototype, {
+patch(OrderWidget.prototype, {
   setup() {
     super.setup();
-    this.order = this.currentOrder;
-    this.oldLinesLength = 0
-    this.currentLinesLength = this.currentOrder.lines.length;
+    // this.oldLinesLength = 0
+    // this.currentLinesLength = this.currentOrder.lines.length;
 
     useEffect(() => {
       console.log("useEffect ejecutándose");
-      if (this.order && this.order.lines.length > 0) {
+      if (this.props && this.props.lines.length > 0) {
         this.recalculateDiscount();
       }
     }, () => {
       // 3. ESTAS son las dependencias que OWL monitorea
-      return this.order ? [this.order.lines.length > 0] : [];
+      return this.props ? [this.props.lines.length > 0] : [];
     });
 
 
   },
 
   recalculateDiscount() {
-    console.log("ordenActual", this.order);
+    console.log("productos", this.props.lines);
     // let newOrderLines = []
-    if (this.order && this.order.lines.length > 0) {
+    if (this.props && this.props.lines.length > 0) {
       console.log("hay productos en la orden")
       let discount = this.searchProductDiscount(this.order.lines)
       if (discount) {
-        let newTotal = this.order.amount_total - discount.price_unit;
-        // newTotal = this.roundMoneyWithThreshold(newTotal);
-        // console.log("nuevo total con redondeo: ", newTotal)
-        console.log("nuevo total: ", newTotal)
-        console.log("descuento: ", discount)
-        this.order.amount_total = this.order.amount_total - newTotal;
+        // let newTotal = this.order.amount_total - discount.price_unit;
+        // // newTotal = this.roundMoneyWithThreshold(newTotal);
+        // // console.log("nuevo total con redondeo: ", newTotal)
+        // console.log("nuevo total: ", newTotal)
+        // console.log("descuento: ", discount)
+        // this.order.amount_total = this.order.amount_total - newTotal;
         // newOrderLines = this.order.lines.map((item) => {
         //   let discount=0
         //   let discountProduct = item.
