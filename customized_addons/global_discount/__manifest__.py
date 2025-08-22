@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "global_discount",
-    "summary": "Module for aplication global discounts to products",
+    "name": "Global Discount",
+    "summary": "Module for aplication positive global discounts to products",
     "description": """
         Module to apply a global discount for each product on list for sale, and send it for dian a positive
         value for correctly billing
@@ -13,6 +13,7 @@
     # for the full list
     "category": "Uncategorized",
     "version": "0.1",
+    "license": "LGPL-3",
     # any module necessary for this one to work correctly
     "depends": ["base", "point_of_sale"],
     # always loaded
@@ -21,14 +22,11 @@
         "views/views.xml",
         "views/templates.xml",
     ],
-    # only loaded in demonstration mode
-    "demo": [
-        "demo/demo.xml",
-    ],
     "application": True,
     "installable": True,
     "assets": {
-        "global_discount/static/src/**/*.ts",
-        "global_discount/static/src/**/*.xml",
+        "point_of_sale._assets_pos": [
+            "global_discount/static/src/js/*.js",  # Un asterisco
+        ],
     },
 }  # type: ignore
